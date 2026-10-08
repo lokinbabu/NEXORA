@@ -5,6 +5,10 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import { useToast } from '../../context/ToastContext.jsx';
 import { ApiError } from '../../services/api.js';
 
+// Optional demo credentials, set at build time (e.g. on Render) so they are NOT stored in the repo.
+const DEMO_EMAIL = (import.meta.env.VITE_DEMO_ADMIN_EMAIL || '').trim();
+const DEMO_PASSWORD = import.meta.env.VITE_DEMO_ADMIN_PASSWORD || '';
+
 export default function AdminLogin() {
   const { login } = useAuth();
   const toast = useToast();
@@ -58,6 +62,25 @@ export default function AdminLogin() {
         {notAdmin && (
           <div className="form-banner form-banner--error" role="alert">
             This account is not an admin. Use the account created by the seed script.
+          </div>
+        )}
+
+        {DEMO_EMAIL && DEMO_PASSWORD && (
+          <div
+            className="form-banner"
+            style={{ marginTop: 14, border: '1px dashed var(--cyan)', borderRadius: 10, padding: '12px 14px', fontSize: '0.88rem' }}
+          >
+            <strong>Demo admin access</strong>
+            <div style={{ marginTop: 6 }}>Email: <code>{DEMO_EMAIL}</code></div>
+            <div>Password: <code>{DEMO_PASSWORD}</code></div>
+            <button
+              type="button"
+              className="btn btn--ghost"
+              style={{ marginTop: 10 }}
+              onClick={() => setForm({ email: DEMO_EMAIL, password: DEMO_PASSWORD })}
+            >
+              Fill in for me
+            </button>
           </div>
         )}
 
