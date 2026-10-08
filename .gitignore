@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Builds
+client/dist/
+server/dist/
+
+# Environment variables (NEVER commit — contains your MongoDB URI & secrets)
+.env
+.env.local
+.env.production
+server/.env
+client/.env
+client/.env.local
+client/.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.freebuff/
